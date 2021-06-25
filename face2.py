@@ -1,6 +1,9 @@
 # Starting of file will be importing of cv2 module which allows to do certain functions with our image
 import cv2
 
+#Then importing of OS module
+import os
+
 #Here,face_classifier stores the data set of frontal face
 face_classifier = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
@@ -12,6 +15,9 @@ smile_classifier = cv2.CascadeClassifier("haarcascade_smile.xml")
 
 #Activating the camera and storing the video capture in cap
 cap = cv2.VideoCapture(0)
+
+#Initializing of a variable with initial value of 0
+count = 0
 
 while True:
 
@@ -35,10 +41,26 @@ while True:
         #Here,we create rectangle with dimensions specified and color of box and thickness
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255), 2)
 
+        #This will crop the gray_image according to dimensions passed
         roi_gray = convert_gray[y:y+h, x:x+w]
 
+        #This will crop the original frame according to the dimensions passed
         roi_color = frame[y:y+h, x:x+w]
-        
+
+        #Providing the path value where we will store the captured frames
+        path = r'C:\Users\hpw\OneDrive\Documents\ImageProcessing\Output'
+
+        #Assigning the frames a name from which they will save
+        frame_number = "Frame_{}.jpg".format(count)
+
+        os.chdir(path)
+
+        #This will create and save the images
+        cv2.imwrite(frame_number, roi_color)
+
+        #Updating the value of count so that name of frame get continuously updated
+        count += 1
+
         #here we are taking out only the part of our smile
         smiles = smile_classifier.detectMultiScale(roi_gray)
 
