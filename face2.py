@@ -27,7 +27,7 @@ while True:
     convert_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     #After converting into gray we will pass the pixels into detectMultiScale() so that it could automatically detect our face and can set the frame 
-    faces = face_classifier.detectMultiScale(convert_gray)
+    faces = face_classifier.detectMultiScale(convert_gray, scaleFactor=1.3, minNeighbors=3, minSize=(30, 30))
 
     #Making the suitable size frame of our face now we are assigning its height width value to variables so that we can make rectangle box
     for (x, y, w, h) in faces:
