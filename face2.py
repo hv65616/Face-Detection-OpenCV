@@ -17,16 +17,16 @@ while True:
 
     #At this line we are doing 2 things
     #In ret we will be storing either true or false of image reading
-    #In frame we will be storing the pixels of image that our camera read
+    #In frame we will be storing the frames that our camera produces
     ret, frame = cap.read()
 
     #putText() used to put the text with certain compulsory parameters
     cv2.putText(frame,"Face Detection",(200,450),cv2.FONT_HERSHEY_PLAIN,2.3,(255,255,0),2)
 
-    #Here, we will convert the imgae into the gray
+    #Here, we will convert the imgae into the gray basically the pixls become either 0 or 225
     convert_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    #After converting into gray we will pass the pixels into detectMultiScale() so that it could automatically detect our face and can set the frame 
+    #After converting into gray we will pass the converted image into detectMultiScale so that we can find face more appropiately
     faces = face_classifier.detectMultiScale(convert_gray, scaleFactor=1.3, minNeighbors=3, minSize=(30, 30))
 
     #Making the suitable size frame of our face now we are assigning its height width value to variables so that we can make rectangle box
