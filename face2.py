@@ -79,7 +79,7 @@ while True:
     cv2.imshow("My video", frame)
 
     #Waitkey() allows us to set the time interval in between reading and showing
-    key = cv2.waitKey(1)
+    key = cv2.waitKey(10)
 
     #For exiting the window we press q key
     if key == ord("q"):
